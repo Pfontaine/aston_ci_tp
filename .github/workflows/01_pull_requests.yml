@@ -1,0 +1,25 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - develop
+    types:
+      - opened
+
+jobs:
+  launch_test:
+    if: startsWith(github.head.ref, 'feature/')
+    fail-fast: true
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [14, 16]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node_version: {{ matrix.node_version }}
+      - run: npm i
+      - run: npm run test
+      
