@@ -9,7 +9,7 @@ on:
 
 jobs:
   launch_test:
-    if: startsWith(${{ github.head.ref }}, 'feature/')
+    if: startsWith(${{ github.head_ref }}, 'feature/')
     runs-on: ubuntu-latest
     strategy:
       matrix:
