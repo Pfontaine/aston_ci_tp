@@ -21,4 +21,10 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
       - run: npm ci
+      - run: npm run build
       - run: npm run test
+      - run: npm run test:coverage > coverage.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-coverage
+          path: coverage.txt
